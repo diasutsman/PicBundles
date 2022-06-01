@@ -1,14 +1,14 @@
 package com.diasandfahri.picbundles.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.diasandfahri.picbundles.data.response.PhotoItem
 import com.diasandfahri.picbundles.databinding.FragmentHomeBinding
 import com.diasandfahri.picbundles.ui.PhotoAdapter
 import com.diasandfahri.picbundles.ui.PhotoViewModel
@@ -21,6 +21,12 @@ class HomeFragment : Fragment() {
 
     private val viewModel: PhotoViewModel by activityViewModels()
 
+    private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
+        binding.swipeRefreshLayout.isRefreshing = true
+        // call api to reload the screen
+        viewModel.getAllPhotos(1)
+    }
+
     private val mAdapter by lazy {
         PhotoAdapter()
     }
@@ -32,17 +38,38 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        if(viewModel.imagesList.value == null) viewModel.getAllPhotos(1)
-        viewModel.imagesList.observe(viewLifecycleOwner) {
-            Log.i("HomeFragment", "imagesList: $it")
-            mAdapter.setData(it)
-            binding.rvHome.adapter = mAdapter
-        }
+        if (viewModel.imagesList.value == null) viewModel.getAllPhotos(1)
 
-        Log.i("HomeFragment", "onCreateView")
-        
+        viewModel.imagesList.observe(viewLifecycleOwner) { showData(it) }
+        viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
+        viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
 
+        setRefreshLayout()
 
         return binding.root
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            pbLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
+            rvHome.visibility = if (isLoading) View.GONE else View.VISIBLE
+        }
+    }
+
+    private fun showData(data: List<PhotoItem>?) {
+        binding.swipeRefreshLayout.isRefreshing = false
+        mAdapter.setData(data)
+        binding.rvHome.adapter = mAdapter
+    }
+
+    private fun showError(error: Throwable?) {
+        binding.swipeRefreshLayout.isRefreshing = false
+        error?.message?.let {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setRefreshLayout() {
+        binding.swipeRefreshLayout.setOnRefreshListener(refreshListener)
     }
 }

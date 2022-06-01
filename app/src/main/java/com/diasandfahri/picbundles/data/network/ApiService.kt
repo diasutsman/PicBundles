@@ -2,8 +2,10 @@ package com.diasandfahri.picbundles.data.network
 
 import com.diasandfahri.picbundles.BuildConfig
 import com.diasandfahri.picbundles.data.response.PhotoItem
+import com.diasandfahri.picbundles.data.response.RelatedResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -15,4 +17,10 @@ interface ApiService {
         @Query("content_filter") contentFilter: String = "high",
     ): Call<List<PhotoItem>>
 
+    @GET("photos/{id}")
+    fun getRelatedPhotosById(
+        @Path("id") id: String,
+        @Query("client_id") clientId: String = BuildConfig.API_KEY,
+        @Query("content_filter") contentFilter: String = "high",
+    ): Call<RelatedResponse>
 }

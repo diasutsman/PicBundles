@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
+    // parcelize
+    id 'kotlin-parcelize'
+
 }
 
 android {
@@ -35,6 +38,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
+        dataBinding true
         viewBinding true
     }
 }
@@ -64,4 +68,7 @@ dependencies {
 
     // swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // circle image view
+    implementation "de.hdodenhof:circleimageview:3.1.0"
 }
