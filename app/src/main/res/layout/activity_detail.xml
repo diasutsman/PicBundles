@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/dark_grey">
 
     <data>
+
         <variable
             name="photo"
             type="com.diasandfahri.picbundles.data.response.PhotoItem" />
@@ -48,9 +49,9 @@
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar_detail"
-                    android:elevation="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    android:elevation="0dp"
                     android:theme="?attr/actionBarTheme"
                     app:layout_collapseMode="pin" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -102,6 +103,26 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <!--                Download button    -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_download"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="17dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:backgroundTint="@color/light_grey"
+                            app:cornerRadius="50dp"
+                            app:icon="@drawable/ic_download"
+                            app:iconGravity="textStart"
+                            app:iconPadding="0dp"
+                            app:iconSize="25dp"
+                            app:iconTint="@color/black"
+                            app:layout_constraintTop_toTopOf="@id/btn_bookmark"
+                            app:layout_constraintEnd_toStartOf="@id/btn_bookmark" />
+
                         <TextView
                             android:id="@+id/tv_published_by"
                             android:layout_width="wrap_content"
@@ -126,10 +147,10 @@
 
                         <TextView
                             android:id="@+id/tv_fullname"
-                            android:text="@{photo.user.fullName}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
+                            android:text="@{photo.user.fullName}"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@id/img_user"
@@ -143,9 +164,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:layout_marginBottom="19dp"
+                            android:date="@{photo.createdAt}"
                             android:textColor="@color/white"
                             android:textSize="14sp"
-                            android:date="@{photo.createdAt}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@id/img_user"
                             app:layout_constraintTop_toBottomOf="@id/img_user"

@@ -2,7 +2,6 @@ package com.diasandfahri.picbundles.ui.search
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,41 +37,52 @@ class SearchFragment : Fragment() {
 
         binding.rvSearch.adapter = adapter
 
+        setupSearchView()
+
+        observeVariables()
+
+        return binding.root
+    }
+
+    private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    binding.apply {
+                        flSearch.visibility = View.GONE
+
+                        tvTitleSearch.visibility = View.GONE
+                        flSearch.visibility = View.GONE
+
+                    }
+                    if (query.isNotEmpty()) viewModel.searchPhotoByQuery(query)
+                }
                 return true
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Log.i("SearchFragment", "onQueryTextChange: $newText")
-                newText?.let {
-                    binding.apply {
-                        flSearch.visibility = View.GONE
-                        if (newText.isEmpty()) {
+            override fun onQueryTextChange(query: String?): Boolean {
+                query?.let {
+                    if (query.isEmpty()) {
+                        binding.apply {
                             tvTitleSearch.visibility = View.VISIBLE
                             flSearch.visibility = View.VISIBLE
                             pbLoading.visibility = View.GONE
                             rvSearch.visibility = View.GONE
-                        } else {
-                            tvTitleSearch.visibility = View.GONE
-                            flSearch.visibility = View.GONE
                         }
                     }
-                    if(newText.isNotEmpty())viewModel.searchPhotoByQuery(newText)
                 }
                 return true
             }
 
         })
+    }
 
+    private fun observeVariables() {
         viewModel.searchList.observe(viewLifecycleOwner) {
-            Log.i("SearchFragment", "searchList: $it")
             adapter.setData(it)
         }
         viewModel.isSearchLoading.observe(viewLifecycleOwner) { showLoading(it) }
         viewModel.isSearchError.observe(viewLifecycleOwner) { showError(it) }
-
-        return binding.root
     }
 
     private fun showError(error: Throwable?) {
@@ -85,8 +95,6 @@ class SearchFragment : Fragment() {
         isLoading?.let {
             binding.apply {
                 pbLoading.visibility = if (it) View.VISIBLE else View.GONE
-//                if (viewModel.searchList.value == null) flSearch.visibility =
-//                    if (it) View.GONE else View.VISIBLE
                 rvSearch.visibility = if (it) View.GONE else View.VISIBLE
             }
         }
@@ -99,10 +107,13 @@ class SearchFragment : Fragment() {
                 val button = LayoutInflater.from(context).inflate(R.layout.btn_searches,
                     LinearLayout(this@SearchFragment.context as Context),
                     false) as MaterialButton
-                button.parent?.let {
-                    (it as ViewGroup).removeView(button)
+                button.apply {
+                    parent?.let { (it as ViewGroup).removeView(button) }
+                    text = txtSearch
+                    setOnClickListener {
+                        binding.searchView.setQuery(txtSearch, true)
+                    }
                 }
-                button.text = txtSearch
                 addView(button)
             }
         }
