@@ -1,10 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.SearchFragment">
+    android:background="@color/dark_grey">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.search.SearchFragment">
 
+        <TextView
+            android:id="@+id/tv_title_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="43dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/txt_find_out"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_search"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:inputType="text"
+            android:theme="@style/SearchStyle"
+            app:defaultQueryHint="@string/txt_search_hint"
+            app:iconifiedByDefault="false"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_search"
+            app:queryBackground="@null" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/fl_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            app:alignContent="stretch"
+            app:alignItems="stretch"
+            app:flexWrap="wrap"
+            app:layout_constraintTop_toBottomOf="@id/search_view">
+            <!--Will be filled in fragment code-->
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
+            app:spanCount="2"
+            tools:itemCount="10"
+            tools:listitem="@layout/row_item_photo"
+            tools:visibility="invisible" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rv_search" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

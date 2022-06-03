@@ -11,4 +11,19 @@
     <string name="txt_published_by">Published by :</string>
     <string name="txt_more_pictures">More Pictures</string>
     <string name="txt_detail_image">Detail image</string>
+    <string name="txt_bookmark_title">Keep Things Saved for All of your Idea.</string>
+    <string name="txt_unbookmark">Unbookmark</string>
+    <string name="txt_bookmark_removed">Photo removed from bookmarks</string>
+    <string name="txt_bookmark_added">Photo added to bookmarks</string>
+    <string name="txt_find_out">Find out Your Main Idea.</string>
+    <string name="txt_search_hint">Search…</string>
+    <string-array name="searches">
+        <item>Food</item>
+        <item>Vacation</item>
+        <item>Mountain</item>
+        <item>Desssert</item>
+        <item>Beach</item>
+        <item>Landscape</item>
+        <item>Nature</item>
+    </string-array>
 </resources>

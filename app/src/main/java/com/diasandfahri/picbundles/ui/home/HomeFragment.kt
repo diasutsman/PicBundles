@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
     }
 
     private val mAdapter by lazy {
-        PhotoAdapter()
+        PhotoAdapter(viewModel)
     }
 
     override fun onCreateView(
@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
 
         if (viewModel.imagesList.value == null) viewModel.getAllPhotos(1)
 
+        binding.rvHome.adapter = mAdapter
         viewModel.imagesList.observe(viewLifecycleOwner) { showData(it) }
         viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
@@ -59,7 +60,6 @@ class HomeFragment : Fragment() {
     private fun showData(data: List<PhotoItem>?) {
         binding.swipeRefreshLayout.isRefreshing = false
         mAdapter.setData(data)
-        binding.rvHome.adapter = mAdapter
     }
 
     private fun showError(error: Throwable?) {

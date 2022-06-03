@@ -1,25 +1,33 @@
 package com.diasandfahri.picbundles.data.response
 
 import android.os.Parcelable
+import com.diasandfahri.picbundles.data.entity.PhotoEntity
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PhotoItem(
 
+    @field:SerializedName("id")
+    val id: String? = null,
 
     @field:SerializedName("urls")
     val urls: Urls? = null,
-
-    @field:SerializedName("id")
-    val id: String? = null,
 
     @field:SerializedName("created_at")
     val createdAt: String? = null,
 
     @field:SerializedName("user")
     val user: User? = null,
-) : Parcelable
+) : Parcelable {
+    fun asPhotoEntity() = PhotoEntity(
+        id = id as String,
+        createdAt = createdAt as String,
+        regularImageUrl = urls?.regular as String,
+        userFullname = user?.fullName ?: "",
+        userProfileImageUrl = user?.profileImage?.small ?: ""
+    )
+}
 
 @Parcelize
 data class User(

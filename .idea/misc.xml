@@ -3,13 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/bg_search.xml" value="0.168" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_main.xml" value="0.15989583333333332" />
-        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_bookmark.xml" value="0.17552083333333332" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/btn_searches.xml" value="0.17552083333333332" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_bookmark.xml" value="0.10695017454776261" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_home.xml" value="0.10867462108997097" />
-        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_search.xml" value="0.17552083333333332" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/row_item_photo.xml" value="0.17447916666666666" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/menu/bookmark_menu.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/menu/bottom_nav_menu.xml" value="0.131640625" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/menu/home_item_menu.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/menu/unbookmark_menu.xml" value="0.1" />
       </map>
     </option>
   </component>
