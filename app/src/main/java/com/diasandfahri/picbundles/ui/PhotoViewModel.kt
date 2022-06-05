@@ -1,16 +1,26 @@
 package com.diasandfahri.picbundles.ui
 
 import android.app.Application
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
+import android.widget.Toast
 import androidx.lifecycle.*
+import com.diasandfahri.picbundles.R
 import com.diasandfahri.picbundles.data.network.ApiConfig
 import com.diasandfahri.picbundles.data.response.PhotoItem
 import com.diasandfahri.picbundles.data.response.User
 import com.diasandfahri.picbundles.data.room.PhotoDatabase
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class PhotoViewModel(application: Application) : AndroidViewModel(application) {
     private val photoDao = PhotoDatabase.getDatabase(application).photoDao()
@@ -32,24 +42,18 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
     val isSearchError = MutableLiveData<Throwable?>()
 
     // Remote
-    private fun <T> loadData(
-        apiCall: Call<T>,
-        onResponse: (T) -> Unit,
-        onFailure: (Throwable) -> Unit,
+    private fun <T : Any> loadData(
+        apiCall: Flowable<T>,
+        responseHandler: (T) -> Unit,
+        errorHandler: (Throwable) -> Unit,
     ) {
-        apiCall.enqueue(object : Callback<T> {
-            override fun onResponse(
-                call: Call<T>,
-                response: Response<T>,
-            ) {
-                response.body()?.let { onResponse(it) }
-            }
-
-            override fun onFailure(call: Call<T>, t: Throwable) {
-                onFailure(t)
-            }
-
-        })
+        apiCall.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                responseHandler(response)
+            }, { error ->
+                errorHandler(error)
+            })
     }
 
     fun getAllPhotos(page: Int = 1) {
@@ -105,6 +109,30 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
                 isSearchLoading.value = false
             }
         )
+    }
+
+    fun downloadPhoto(context: Context, photo: PhotoItem) {
+        photo.links?.download?.let {
+            val request = DownloadManager.Request(Uri.parse(it))
+            // allow wifi and mobile data download
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
+            request.setTitle(context.getString(R.string.txt_download))
+            request.setDescription("Downloading the file...")
+
+            request.allowScanningByMediaScanner()
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+
+            request.setDestinationInExternalPublicDir(
+                Environment.DIRECTORY_DOWNLOADS,
+                photo.id.toString() + ".jpg"
+            )
+
+            // get download service and enqueue file
+            val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            manager.enqueue(request)
+
+            Toast.makeText(context, "Downloading ${photo.id}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     // DAO
