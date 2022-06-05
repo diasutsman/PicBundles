@@ -93,7 +93,7 @@ class DetailActivity : AppCompatActivity() {
             }
             currentUser.observe(this@DetailActivity) {
                 binding.mPhoto = photo.copy(user = it)
-                viewModel.saveUserIfNotExist(photo)
+                viewModel.saveUserIfNotExist(binding.mPhoto as PhotoItem)
             }
         }
     }
