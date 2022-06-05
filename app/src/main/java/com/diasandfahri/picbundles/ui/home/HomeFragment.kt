@@ -1,10 +1,12 @@
 package com.diasandfahri.picbundles.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -24,7 +26,7 @@ class HomeFragment : Fragment() {
     private val refreshListener = SwipeRefreshLayout.OnRefreshListener {
         binding.swipeRefreshLayout.isRefreshing = true
         // call api to reload the screen
-        viewModel.getAllPhotos(1)
+        viewModel.getAllPhotos()
     }
 
     private val mAdapter by lazy {
@@ -42,7 +44,34 @@ class HomeFragment : Fragment() {
         setRefreshLayout()
         setupRecyclerView()
 
+//        setupEndlessScrolling()
+
         return binding.root
+    }
+
+    private fun setupEndlessScrolling() {
+//        binding.nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _scrollX, scrollY, _oldScrollX, _oldScrollY ->
+//            if (v.getChildAt(v.childCount - 1) != null && scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
+//                // bottom of scroll view reached
+//                // call api to load more data
+//                Toast.makeText(context, "Loading more data", Toast.LENGTH_SHORT).show()
+////                viewModel.getNextPage()
+//            }
+//        })
+//        val scroll = binding.nestedScrollView
+//        scroll.viewTreeObserver?.addOnScrollChangedListener {
+//            val view = scroll.getChildAt(scroll.childCount - 1)
+//            Log.d("InfiniteScroll", "Count==============${scroll.childCount}")
+//
+//            val diff = view.bottom - (scroll.height + scroll.scrollY)
+//            Log.d("InfiniteScroll", "diff==============$diff")
+//
+//            if (diff == 0) {
+//                Toast.makeText(context, "Loading more data", Toast.LENGTH_SHORT).show()
+//                viewModel.getNextPage()
+//            }
+//        }
+//        ViewCompat.setNestedScrollingEnabled(binding.rvHome, false)
     }
 
     private fun setupRecyclerView() {

@@ -1,12 +1,15 @@
 package com.diasandfahri.picbundles.ui
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.doOnLayout
+import androidx.databinding.adapters.ViewBindingAdapter.setOnLongClickListener
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.diasandfahri.picbundles.R
@@ -40,7 +43,6 @@ class PhotoAdapter(private val viewModel: PhotoViewModel) :
             binding.photo = photo
         }
     }
-
     private val photoList = ArrayList<PhotoItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PhotoViewHolder(

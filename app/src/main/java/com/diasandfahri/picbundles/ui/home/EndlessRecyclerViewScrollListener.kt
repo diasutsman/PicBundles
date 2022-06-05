@@ -1,4 +1,4 @@
-package com.diasandfahri.picbundles.utils
+package com.diasandfahri.picbundles.ui.home
 
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager

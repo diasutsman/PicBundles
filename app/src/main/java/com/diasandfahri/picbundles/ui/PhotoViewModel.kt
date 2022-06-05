@@ -5,6 +5,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.diasandfahri.picbundles.R
@@ -17,10 +18,6 @@ import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
 
 class PhotoViewModel(application: Application) : AndroidViewModel(application) {
     private val photoDao = PhotoDatabase.getDatabase(application).photoDao()
@@ -29,6 +26,7 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
     val imagesList = MutableLiveData<List<PhotoItem>?>()
     val isLoading = MutableLiveData(true)
     val isError = MutableLiveData<Throwable?>()
+    private var page = 1
 
     // Detail
     val relatedImageList = MutableLiveData<List<PhotoItem>?>()
@@ -56,9 +54,10 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
             })
     }
 
-    fun getAllPhotos(page: Int = 1) {
+    fun getAllPhotos() {
+        page = 1
         loadData(
-            ApiConfig.getApiService().getAllPhotos(page),
+            ApiConfig.getApiService().getAllPhotos(),
             {
                 imagesList.value = it
                 isError.value = null
@@ -66,6 +65,23 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
             },
             {
                 imagesList.value = null
+                isError.value = it
+                isLoading.value = false
+            }
+        )
+    }
+
+    fun getNextPage() {
+        loadData(
+            ApiConfig.getApiService().getAllPhotos(++page),
+            {
+                Log.i("getNextPage", "page: $page")
+                imagesList.value = listOf(*imagesList.value?.toTypedArray() as Array<out PhotoItem>,
+                    *it.toTypedArray())
+                isError.value = null
+                isLoading.value = false
+            },
+            {
                 isError.value = it
                 isLoading.value = false
             }

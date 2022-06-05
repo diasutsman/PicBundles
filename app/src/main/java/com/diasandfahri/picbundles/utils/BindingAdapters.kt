@@ -13,7 +13,6 @@ object BindingAdapters {
     @BindingAdapter("android:srcFromUrl")
     @JvmStatic
     fun srcFromUrl(imageView: ImageView, url: String?) {
-        Log.i("BindingAdapters", "srcFromUrl: $url")
         url?.let {
             Glide.with(imageView.context)
                 .load(url)

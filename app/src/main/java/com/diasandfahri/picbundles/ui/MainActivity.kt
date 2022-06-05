@@ -1,4 +1,4 @@
-package com.diasandfahri.picbundles
+package com.diasandfahri.picbundles.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.diasandfahri.picbundles.R
 import com.diasandfahri.picbundles.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
