@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.diasandfahri.picbundles.databinding.FragmentBookmarkBinding
 import com.diasandfahri.picbundles.ui.PhotoAdapter
 import com.diasandfahri.picbundles.ui.PhotoViewModel
@@ -17,20 +18,28 @@ class BookmarkFragment : Fragment() {
 
     private val viewModel: PhotoViewModel by activityViewModels()
 
-    private val adapter by lazy {
+    private val mAdapter by lazy {
         PhotoAdapter(viewModel)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
-        binding.rvBookmark.adapter = adapter
+        setupRecyclerView()
 
         viewModel.getAllBookmarkedPhotos().observe(viewLifecycleOwner) {
-            adapter.setData(it)
+            mAdapter.setData(it)
         }
         return binding.root
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvBookmark.apply {
+            adapter = mAdapter
+            ItemTouchHelper(SwipeToDelete(viewModel, mAdapter)).attachToRecyclerView(this)
+        }
     }
 }

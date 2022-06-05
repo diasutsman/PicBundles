@@ -1,6 +1,7 @@
 package com.diasandfahri.picbundles.ui.detail
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -54,7 +55,7 @@ class DetailActivity : AppCompatActivity() {
             rvMorePicture.adapter = adapter
             title = ""
             lifecycleOwner = this@DetailActivity
-            photo = photo
+            mPhoto = photo
         }
     }
 
@@ -82,13 +83,30 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observeImageList() {
-        viewModel.getRelatedPhotosById(photo.id as String)
-        viewModel.relatedImageList.observe(this) {
-            adapter.setData(it)
+        viewModel.apply {
+            getRelatedPhotosById(photo.id as String)
+            relatedImageList.observe(this@DetailActivity) {
+                adapter.setData(it)
+            }
+            isRelatedLoading.observe(this@DetailActivity) {
+                showLoading(it)
+            }
+            currentUser.observe(this@DetailActivity) {
+                binding.mPhoto = photo.copy(user = it)
+                viewModel.saveUserIfNotExist(photo)
+            }
         }
-        viewModel.currentUser.observe(this) {
-            binding.photo = photo.copy(user = it)
-            viewModel.saveUserIfNotExist(photo)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            if (isLoading) {
+                pbLoading.visibility = View.VISIBLE
+                rvMorePicture.visibility = View.GONE
+            } else {
+                pbLoading.visibility = View.GONE
+                rvMorePicture.visibility = View.VISIBLE
+            }
         }
     }
 

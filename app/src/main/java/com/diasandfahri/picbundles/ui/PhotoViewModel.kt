@@ -97,7 +97,7 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
     fun searchPhotoByQuery(query: String) {
         isSearchLoading.value = true
         loadData(
-            ApiConfig.getApiService().sesrchPhotoByQuery(query),
+            ApiConfig.getApiService().searchPhotoByQuery(query),
             {
                 searchList.value = it.results
                 isSearchError.value = null
@@ -119,19 +119,18 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
             request.setTitle(context.getString(R.string.txt_download))
             request.setDescription("Downloading the file...")
 
-            request.allowScanningByMediaScanner()
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
 
             request.setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_DOWNLOADS,
-                photo.id.toString() + ".jpg"
+                photo.id.toString() + ".png"
             )
 
             // get download service and enqueue file
             val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             manager.enqueue(request)
 
-            Toast.makeText(context, "Downloading ${photo.id}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Downloading ${photo.id}.png", Toast.LENGTH_SHORT).show()
         }
     }
 

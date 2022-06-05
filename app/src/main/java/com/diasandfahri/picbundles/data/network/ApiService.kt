@@ -27,7 +27,7 @@ interface ApiService {
     ): Flowable<RelatedResponse>
 
     @GET("search/photos")
-    fun sesrchPhotoByQuery(
+    fun searchPhotoByQuery(
         @Query("query") query: String,
         @Query("client_id") clientId: String = BuildConfig.API_KEY,
         @Query("per_page") perPage: Int = 30,

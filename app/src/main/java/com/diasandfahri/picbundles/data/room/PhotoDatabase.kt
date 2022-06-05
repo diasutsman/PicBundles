@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.diasandfahri.picbundles.data.entity.PhotoEntity
 
-@Database(entities = [PhotoEntity::class], version = 1, exportSchema = false)
+@Database(entities = [PhotoEntity::class], version = 3, exportSchema = false)
 abstract class PhotoDatabase : RoomDatabase() {
 
     abstract fun photoDao(): PhotoDao

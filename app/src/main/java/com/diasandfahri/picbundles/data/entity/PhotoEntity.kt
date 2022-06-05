@@ -33,7 +33,7 @@ data class PhotoEntity(
         ),
         user = User(
             firstName = userFullname.split(" ")[0],
-            lastName = if(userFullname.split(" ").size == 1) null else userFullname.split(" ")[1],
+            lastName = if (userFullname.split(" ").size == 1) null else userFullname.split(" ")[1],
             profileImage = ProfileImage(
                 small = userProfileImageUrl,
             ),

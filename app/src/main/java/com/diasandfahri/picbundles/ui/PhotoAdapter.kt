@@ -94,6 +94,8 @@ class PhotoAdapter(private val viewModel: PhotoViewModel) :
         holder.bind(photo)
     }
 
+    fun getPhotoAt(position: Int) = photoList[position]
+
     override fun getItemCount(): Int = photoList.size
 
     fun setData(data: List<PhotoItem>?) {
