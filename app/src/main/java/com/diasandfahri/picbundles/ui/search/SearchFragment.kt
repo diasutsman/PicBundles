@@ -129,4 +129,10 @@ class SearchFragment : Fragment() {
         }
     }
 
+    // prevent memory leak
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

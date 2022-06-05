@@ -42,4 +42,10 @@ class BookmarkFragment : Fragment() {
             ItemTouchHelper(SwipeToDelete(viewModel, mAdapter)).attachToRecyclerView(this)
         }
     }
+
+    // prevent memory leak
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
