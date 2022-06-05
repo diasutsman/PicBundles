@@ -105,7 +105,7 @@ class SearchFragment : Fragment() {
             binding.apply {
                 pbLoading.visibility = if (it) View.VISIBLE else View.GONE
                 rvSearch.visibility = if (it) View.GONE else View.VISIBLE
-                if (it)adapter.setData(listOf())
+                if(it)adapter.setData(listOf())
             }
         }
     }

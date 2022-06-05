@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1385" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/bg_search.xml" value="0.168" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/bg_splashscreen.xml" value="0.105" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_app_logo.xml" value="0.106" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1385" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_main.xml" value="0.15989583333333332" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/btn_searches.xml" value="0.17552083333333332" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_bookmark.xml" value="0.10695017454776261" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_home.xml" value="0.10867462108997097" />
