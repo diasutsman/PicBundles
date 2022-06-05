@@ -1,7 +1,6 @@
 package com.diasandfahri.picbundles.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +18,9 @@ class DetailActivity : AppCompatActivity() {
 
     private val viewModel: PhotoViewModel by viewModels()
 
+    private var _photo: PhotoItem? = null
+    private val photo get() = _photo as PhotoItem
+
     private val adapter by lazy {
         PhotoAdapter(viewModel)
     }
@@ -26,6 +28,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityDetailBinding.inflate(layoutInflater)
+        _photo = intent.getParcelableExtra(PHOTO_KEY)
         setContentView(binding.root)
         setToolbarAsSupportActionBar()
 
@@ -34,6 +37,16 @@ class DetailActivity : AppCompatActivity() {
         observeImageList()
 
         implementBookMarkButton()
+
+        setupDownloadButton()
+    }
+
+    private fun setupDownloadButton() {
+        binding.btnDownload.apply {
+            setOnClickListener {
+                viewModel.downloadPhoto(context, photo)
+            }
+        }
     }
 
     private fun setupBindings() {
@@ -41,13 +54,13 @@ class DetailActivity : AppCompatActivity() {
             rvMorePicture.adapter = adapter
             title = ""
             lifecycleOwner = this@DetailActivity
-            photo = intent.getParcelableExtra(PHOTO_KEY)
+            photo = photo
         }
     }
 
     private fun implementBookMarkButton() {
         binding.btnBookmark.apply {
-            viewModel.isBookmarked(binding.photo as PhotoItem)
+            viewModel.isBookmarked(photo)
                 .observe(this@DetailActivity) { isBookmarked ->
                     icon = AppCompatResources.getDrawable(this@DetailActivity,
                         if (isBookmarked) R.drawable.ic_bookmark_filled
@@ -56,10 +69,10 @@ class DetailActivity : AppCompatActivity() {
                     var message: String
                     setOnClickListener {
                         message = if (isBookmarked) {
-                            viewModel.unBookmarkPhoto(binding.photo as PhotoItem)
+                            viewModel.unBookmarkPhoto(photo)
                             context.getString(R.string.txt_bookmark_removed)
                         } else {
-                            viewModel.bookmarkPhoto(binding.photo as PhotoItem)
+                            viewModel.bookmarkPhoto(photo)
                             context.getString(R.string.txt_bookmark_added)
                         }
                         Toast.makeText(this@DetailActivity, message, Toast.LENGTH_SHORT).show()
@@ -69,13 +82,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun observeImageList() {
-        viewModel.getRelatedPhotosById(binding.photo?.id as String)
+        viewModel.getRelatedPhotosById(photo.id as String)
         viewModel.relatedImageList.observe(this) {
             adapter.setData(it)
         }
         viewModel.currentUser.observe(this) {
-            binding.photo = binding.photo?.copy(user = it)
-            viewModel.saveUserIfNotExist(binding.photo as PhotoItem)
+            binding.photo = photo.copy(user = it)
+            viewModel.saveUserIfNotExist(photo)
         }
     }
 

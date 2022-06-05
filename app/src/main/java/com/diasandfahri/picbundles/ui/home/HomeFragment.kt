@@ -38,16 +38,24 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        if (viewModel.imagesList.value == null) viewModel.getAllPhotos(1)
+        setupBindings()
+        setRefreshLayout()
+        setupRecyclerView()
 
-        binding.rvHome.adapter = mAdapter
+        return binding.root
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvHome.apply {
+            adapter = mAdapter
+        }
+    }
+
+    private fun setupBindings() {
+        if (viewModel.imagesList.value == null) viewModel.getAllPhotos()
         viewModel.imagesList.observe(viewLifecycleOwner) { showData(it) }
         viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         viewModel.isError.observe(viewLifecycleOwner) { showError(it) }
-
-        setRefreshLayout()
-
-        return binding.root
     }
 
     private fun showLoading(isLoading: Boolean) {

@@ -19,6 +19,9 @@ data class PhotoItem(
 
     @field:SerializedName("user")
     val user: User? = null,
+
+    @field:SerializedName("links")
+    val links: Links? = null,
 ) : Parcelable {
     fun asPhotoEntity() = PhotoEntity(
         id = id as String,
@@ -28,6 +31,13 @@ data class PhotoItem(
         userProfileImageUrl = user?.profileImage?.small ?: ""
     )
 }
+
+@Parcelize
+data class Links(
+
+    @field:SerializedName("download")
+    val download: String? = null,
+) : Parcelable
 
 @Parcelize
 data class User(

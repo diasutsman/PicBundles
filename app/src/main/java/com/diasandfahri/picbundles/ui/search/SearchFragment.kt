@@ -2,6 +2,7 @@ package com.diasandfahri.picbundles.ui.search
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.diasandfahri.picbundles.R
+import com.diasandfahri.picbundles.data.response.PhotoItem
 import com.diasandfahri.picbundles.databinding.FragmentSearchBinding
 import com.diasandfahri.picbundles.ui.PhotoAdapter
 import com.diasandfahri.picbundles.ui.PhotoViewModel
@@ -50,10 +52,7 @@ class SearchFragment : Fragment() {
                 query?.let {
                     binding.apply {
                         flSearch.visibility = View.GONE
-
                         tvTitleSearch.visibility = View.GONE
-                        flSearch.visibility = View.GONE
-
                     }
                     if (query.isNotEmpty()) viewModel.searchPhotoByQuery(query)
                 }
@@ -64,10 +63,7 @@ class SearchFragment : Fragment() {
                 query?.let {
                     if (query.isEmpty()) {
                         binding.apply {
-                            tvTitleSearch.visibility = View.VISIBLE
-                            flSearch.visibility = View.VISIBLE
-                            pbLoading.visibility = View.GONE
-                            rvSearch.visibility = View.GONE
+                            viewModel.searchList.value = null
                         }
                     }
                 }
@@ -78,11 +74,24 @@ class SearchFragment : Fragment() {
     }
 
     private fun observeVariables() {
-        viewModel.searchList.observe(viewLifecycleOwner) {
-            adapter.setData(it)
-        }
+        viewModel.searchList.observe(viewLifecycleOwner) { showData(it) }
         viewModel.isSearchLoading.observe(viewLifecycleOwner) { showLoading(it) }
         viewModel.isSearchError.observe(viewLifecycleOwner) { showError(it) }
+    }
+
+    private fun showData(data: List<PhotoItem>?) {
+        binding.apply {
+            if (data == null) {
+                tvTitleSearch.visibility = View.VISIBLE
+                flSearch.visibility = View.VISIBLE
+                rvSearch.visibility = View.GONE
+            } else {
+                flSearch.visibility = View.GONE
+                tvTitleSearch.visibility = View.GONE
+            }
+        }
+        Log.i("SearchFragment", "showData: $data")
+        adapter.setData(data)
     }
 
     private fun showError(error: Throwable?) {
@@ -96,6 +105,7 @@ class SearchFragment : Fragment() {
             binding.apply {
                 pbLoading.visibility = if (it) View.VISIBLE else View.GONE
                 rvSearch.visibility = if (it) View.GONE else View.VISIBLE
+                if (it)adapter.setData(listOf())
             }
         }
     }

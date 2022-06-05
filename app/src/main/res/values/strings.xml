@@ -17,6 +17,7 @@
     <string name="txt_bookmark_added">Photo added to bookmarks</string>
     <string name="txt_find_out">Find out Your Main Idea.</string>
     <string name="txt_search_hint">Search…</string>
+    <string name="txt_download">Download</string>
     <string-array name="searches">
         <item>Food</item>
         <item>Vacation</item>
