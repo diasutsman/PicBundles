@@ -1,6 +1,7 @@
 package com.diasandfahri.picbundles.ui.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -45,6 +46,7 @@ class DetailActivity : AppCompatActivity() {
     private fun setupDownloadButton() {
         binding.btnDownload.apply {
             setOnClickListener {
+                Log.i("Photo", "Downloading $photo")
                 viewModel.downloadPhoto(context, photo)
             }
         }
@@ -91,8 +93,9 @@ class DetailActivity : AppCompatActivity() {
             isRelatedLoading.observe(this@DetailActivity) {
                 showLoading(it)
             }
-            currentUser.observe(this@DetailActivity) {
-                binding.mPhoto = photo.copy(user = it)
+            currentRelatedResponse.observe(this@DetailActivity) {
+                binding.mPhoto = photo.copy(user = it?.user, links = it?.links)
+                if(photo.links == null) _photo = photo.copy(links = it?.links)
                 viewModel.saveUserIfNotExist(binding.mPhoto as PhotoItem)
             }
         }

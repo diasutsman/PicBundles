@@ -8,6 +8,10 @@ data class RelatedResponse(
 
     @field:SerializedName("user")
     val user: User? = null,
+
+
+    @field:SerializedName("links")
+    val links: Links? = null,
 )
 
 data class RelatedCollections(

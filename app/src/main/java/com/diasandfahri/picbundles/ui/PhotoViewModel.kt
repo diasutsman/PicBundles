@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.diasandfahri.picbundles.R
 import com.diasandfahri.picbundles.data.network.ApiConfig
+import com.diasandfahri.picbundles.data.response.Links
 import com.diasandfahri.picbundles.data.response.PhotoItem
+import com.diasandfahri.picbundles.data.response.RelatedResponse
 import com.diasandfahri.picbundles.data.response.User
 import com.diasandfahri.picbundles.data.room.PhotoDatabase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -30,7 +32,7 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
 
     // Detail
     val relatedImageList = MutableLiveData<List<PhotoItem>?>()
-    val currentUser = MutableLiveData<User?>()
+    val currentRelatedResponse = MutableLiveData<RelatedResponse?>()
     val isRelatedLoading = MutableLiveData(true)
     val isRelatedError = MutableLiveData<Throwable?>()
 
@@ -71,23 +73,6 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
-    fun getNextPage() {
-        loadData(
-            ApiConfig.getApiService().getAllPhotos(++page),
-            {
-                Log.i("getNextPage", "page: $page")
-                imagesList.value = listOf(*imagesList.value?.toTypedArray() as Array<out PhotoItem>,
-                    *it.toTypedArray())
-                isError.value = null
-                isLoading.value = false
-            },
-            {
-                isError.value = it
-                isLoading.value = false
-            }
-        )
-    }
-
     fun getRelatedPhotosById(id: String) {
         loadData(
             ApiConfig.getApiService().getRelatedPhotosById(id),
@@ -99,13 +84,13 @@ class PhotoViewModel(application: Application) : AndroidViewModel(application) {
                 relatedImageList.value = results
                 isRelatedError.value = null
                 isRelatedLoading.value = false
-                currentUser.value = relatedResponse.user
+                currentRelatedResponse.value = relatedResponse
             },
             {
                 relatedImageList.value = null
                 isRelatedError.value = it
                 isRelatedLoading.value = false
-                currentUser.value = null
+                currentRelatedResponse.value = null
             }
         )
     }

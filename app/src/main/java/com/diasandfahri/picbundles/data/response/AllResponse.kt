@@ -28,7 +28,8 @@ data class PhotoItem(
         createdAt = createdAt as String,
         regularImageUrl = urls?.regular as String,
         userFullname = user?.fullName ?: "",
-        userProfileImageUrl = user?.profileImage?.small ?: ""
+        userProfileImageUrl = user?.profileImage?.small ?: "",
+        downloadLink = links?.download ?: "",
     )
 }
 

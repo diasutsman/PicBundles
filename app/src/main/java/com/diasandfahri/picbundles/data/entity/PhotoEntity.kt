@@ -3,10 +3,7 @@ package com.diasandfahri.picbundles.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.diasandfahri.picbundles.data.response.PhotoItem
-import com.diasandfahri.picbundles.data.response.ProfileImage
-import com.diasandfahri.picbundles.data.response.Urls
-import com.diasandfahri.picbundles.data.response.User
+import com.diasandfahri.picbundles.data.response.*
 
 @Entity(tableName = "photos")
 data class PhotoEntity(
@@ -24,6 +21,9 @@ data class PhotoEntity(
 
     @ColumnInfo(name = "user_profile_image_url")
     val userProfileImageUrl: String,
+
+    @ColumnInfo(name = "download_link")
+    val downloadLink: String,
 ) {
     fun asPhotoResponse() = PhotoItem(
         id = id,
@@ -37,6 +37,9 @@ data class PhotoEntity(
             profileImage = ProfileImage(
                 small = userProfileImageUrl,
             ),
+        ),
+        links = Links(
+            download = downloadLink,
         ),
     )
 }
