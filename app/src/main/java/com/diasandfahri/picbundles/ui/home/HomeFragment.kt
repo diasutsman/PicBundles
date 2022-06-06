@@ -42,34 +42,7 @@ class HomeFragment : Fragment() {
         setRefreshLayout()
         setupRecyclerView()
 
-//        setupEndlessScrolling()
-
         return binding.root
-    }
-
-    private fun setupEndlessScrolling() {
-//        binding.nestedScrollView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _scrollX, scrollY, _oldScrollX, _oldScrollY ->
-//            if (v.getChildAt(v.childCount - 1) != null && scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight) {
-//                // bottom of scroll view reached
-//                // call api to load more data
-//                Toast.makeText(context, "Loading more data", Toast.LENGTH_SHORT).show()
-////                viewModel.getNextPage()
-//            }
-//        })
-//        val scroll = binding.nestedScrollView
-//        scroll.viewTreeObserver?.addOnScrollChangedListener {
-//            val view = scroll.getChildAt(scroll.childCount - 1)
-//            Log.d("InfiniteScroll", "Count==============${scroll.childCount}")
-//
-//            val diff = view.bottom - (scroll.height + scroll.scrollY)
-//            Log.d("InfiniteScroll", "diff==============$diff")
-//
-//            if (diff == 0) {
-//                Toast.makeText(context, "Loading more data", Toast.LENGTH_SHORT).show()
-//                viewModel.getNextPage()
-//            }
-//        }
-//        ViewCompat.setNestedScrollingEnabled(binding.rvHome, false)
     }
 
     private fun setupRecyclerView() {

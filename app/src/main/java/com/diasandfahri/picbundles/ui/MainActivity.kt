@@ -1,9 +1,9 @@
 package com.diasandfahri.picbundles.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -18,13 +18,22 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = _binding as ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        val splashscreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-
 
         _binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+        Log.i("MainActivity", "onCreate")
         setupBottomNavigationBar()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("MainActivity", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+         Log.i("MainActivity", "onResume")
     }
 
     private fun setupBottomNavigationBar() {
