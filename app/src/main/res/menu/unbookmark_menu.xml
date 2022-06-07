@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_unbookmark"
-        android:icon="@drawable/ic_bookmark"
+        android:icon="@drawable/ic_bookmark_outlined"
         app:showAsAction="always"
         android:title="@string/txt_unbookmark" />
 </menu>

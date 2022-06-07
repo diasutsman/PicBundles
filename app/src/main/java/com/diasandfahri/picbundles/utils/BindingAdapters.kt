@@ -28,8 +28,8 @@ object BindingAdapters {
         date?.let {
             val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             tv.text =
-                SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(formatter.parse(
-                    date.substring(0, 10)) as Date) ?: ""
+                tv.context.getString(R.string.txt_date_format, SimpleDateFormat("EEEE, dd MMMM yyyy", Locale.getDefault()).format(formatter.parse(
+                    date.substring(0, 10)) as Date) ?: "")
         }
     }
 }

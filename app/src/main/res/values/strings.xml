@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">PicBundles</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_photo_item_desc">Photo item</string>
     <string name="hello_user">Hello, User</string>
     <string name="txt_lets">Let’s find Pictures for your Contens Idea</string>
@@ -22,9 +20,10 @@
         <item>Food</item>
         <item>Vacation</item>
         <item>Mountain</item>
-        <item>Desssert</item>
+        <item>Dessert</item>
         <item>Beach</item>
         <item>Landscape</item>
         <item>Nature</item>
     </string-array>
+    <string name="txt_date_format">On %s</string>
 </resources>

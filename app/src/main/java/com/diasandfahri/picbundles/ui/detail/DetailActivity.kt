@@ -67,7 +67,7 @@ class DetailActivity : AppCompatActivity() {
                 .observe(this@DetailActivity) { isBookmarked ->
                     icon = AppCompatResources.getDrawable(this@DetailActivity,
                         if (isBookmarked) R.drawable.ic_bookmark_filled
-                        else R.drawable.ic_bookmark
+                        else R.drawable.ic_bookmark_outlined
                     )
                     var message: String
                     setOnClickListener {

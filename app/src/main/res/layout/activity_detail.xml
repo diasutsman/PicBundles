@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/dark_grey">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,6 +13,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_primary"
         tools:context="com.diasandfahri.picbundles.ui.detail.DetailActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -61,13 +61,11 @@
             android:id="@+id/nsv_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/dark_grey">
+                android:layout_height="wrap_content">
                 <!--     Desc Card       -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_detail"
@@ -95,7 +93,7 @@
                             android:insetBottom="0dp"
                             app:backgroundTint="@color/light_grey"
                             app:cornerRadius="50dp"
-                            app:icon="@drawable/ic_bookmark"
+                            app:icon="@drawable/ic_bookmark_outlined"
                             app:iconGravity="textStart"
                             app:iconPadding="0dp"
                             app:iconSize="25dp"
@@ -184,18 +182,19 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/txt_more_pictures"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
                     app:layout_constraintTop_toBottomOf="@id/cv_detail" />
 
                 <ProgressBar
                     android:id="@+id/pb_loading"
+                    style="@style/Widget.AppCompat.ProgressBar.Me"
                     android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginTop="32dp"
                     android:visibility="visible"
-                    android:layout_height="50dp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_more_picture" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -205,11 +204,10 @@
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="24dp"
                     android:orientation="vertical"
-                    android:visibility="invisible"
+                    android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/tv_more_picture"
                     app:spanCount="2"
-                    tools:itemCount="100"
                     tools:listitem="@layout/row_item_photo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

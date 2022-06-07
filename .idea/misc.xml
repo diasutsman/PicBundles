@@ -7,13 +7,17 @@
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/bg_search.xml" value="0.168" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/bg_splashscreen.xml" value="0.105" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_app_logo.xml" value="0.106" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_bookmark.xml" value="0.1385" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_home.xml" value="0.184" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_home_outline.xml" value="0.1385" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1385" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/drawable/ic_search.xml" value="0.1385" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_detail.xml" value="0.1" />
-        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_main.xml" value="0.15989583333333332" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/btn_searches.xml" value="0.17552083333333332" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_bookmark.xml" value="0.10695017454776261" />
-        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_home.xml" value="0.10867462108997097" />
+        <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_home.xml" value="0.13333333333333333" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/layout/row_item_photo.xml" value="0.1263894606834088" />
         <entry key="..\:/AndroidStudioProjects/PicBundles/app/src/main/res/menu/bookmark_menu.xml" value="0.1" />

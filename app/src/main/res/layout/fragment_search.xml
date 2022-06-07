@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey">
+    android:background="@color/color_primary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="@string/txt_find_out"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,12 +57,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search"
-            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="24dp"
             android:orientation="vertical"
+            android:visibility="invisible"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/search_view"
             app:spanCount="2"
@@ -72,6 +72,7 @@
 
         <ProgressBar
             android:id="@+id/pb_loading"
+            style="@style/Widget.AppCompat.ProgressBar.Me"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
