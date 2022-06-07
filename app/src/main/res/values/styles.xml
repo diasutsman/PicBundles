@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Widget.AppCompat.ProgressBar.Me" parent="Widget.AppCompat.ProgressBar">
         <item name="android:indeterminateTint">@color/black</item>
+    </style>
+
+    <style name="RvStyle">
+        <item name="android:nestedScrollingEnabled">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:orientation">vertical</item>
     </style>
 </resources>
