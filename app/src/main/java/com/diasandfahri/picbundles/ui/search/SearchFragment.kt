@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -55,6 +56,7 @@ class SearchFragment : Fragment() {
                         tvTitleSearch.visibility = View.GONE
                     }
                     if (query.isNotEmpty()) viewModel.searchPhotoByQuery(query)
+                    hideKeyboard()
                 }
                 return true
             }
@@ -65,12 +67,23 @@ class SearchFragment : Fragment() {
                         binding.apply {
                             viewModel.searchList.value = null
                         }
+                        hideKeyboard()
                     }
                 }
                 return true
             }
 
         })
+    }
+
+    private fun hideKeyboard() {
+        // hide keyboard
+        try {
+            val inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            inputMethodManager?.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        } catch (e: Exception) {
+            Log.e("SearchFragmet", "Error hide keyboard: ${e.message}")
+        }
     }
 
     private fun observeVariables() {
