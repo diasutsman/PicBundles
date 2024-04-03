@@ -23,7 +23,7 @@ class SwipeToDelete(private val viewModel: PhotoViewModel, private val adapter: 
         val photo = adapter.getPhotoAt(position)
 
         viewModel.unBookmarkPhoto(photo)
-        restoreDataIfUserUndo(viewHolder.itemView,photo)
+        restoreDataIfUserUndo(viewHolder.itemView, photo)
     }
 
     private fun restoreDataIfUserUndo(view: View, photo: PhotoItem) {
